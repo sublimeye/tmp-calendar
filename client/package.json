@@ -2,9 +2,8 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://peaceful-everglades-50783.herokuapp.com",
+  "homepage": "https://www.yourHerokuUrl.com",
   "dependencies": {
-    "moment": "2.21.0",
     "react": "16.2.0",
     "react-dom": "16.2.0",
     "react-scripts-ts": "2.13.0"
