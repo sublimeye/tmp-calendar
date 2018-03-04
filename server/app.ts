@@ -1,4 +1,3 @@
-import * as HttpStatus from 'http-status-codes';
 import * as express from 'express';
 import * as path from 'path';
 
@@ -16,7 +15,6 @@ app.get('/api', (req, res) => {
   //   return;
   // }
 
-  res.sendStatus(HttpStatus.OK);
   res.json({
     data: []
   });
