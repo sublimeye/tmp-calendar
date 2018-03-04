@@ -6,6 +6,9 @@ node_modules/
 # testing
 coverage/
 
+#server build
+build/
+
 # client build
 client/build/
 
