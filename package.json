@@ -1,5 +1,5 @@
 {
-  "name": "ts-node-cra",
+  "name": "create-react-app-typescript-node",
   "version": "0.1.0",
   "private": true,
   "main": "build/server/index.js",
@@ -13,6 +13,7 @@
     "react-scripts-ts": "2.13.0"
   },
   "scripts": {
+    "install": "concurrently --kill-others-on-fail \"cd client && yarn install\"",
     "clean": "rm -rf build && rm -rf client/build",
     "deploy": "yarn run clean && yarn run build && git push heroku master",
     "deploy-dev": "yarn run clean && yarn run build && heroku local",
