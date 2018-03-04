@@ -1,0 +1,32 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://peaceful-everglades-50783.herokuapp.com",
+  "dependencies": {
+    "moment": "2.21.0",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
+    "react-scripts-ts": "2.13.0"
+  },
+  "scripts": {
+    "start": "react-scripts-ts start",
+    "build": "react-scripts-ts build",
+    "test": "react-scripts-ts test --env=jsdom",
+    "eject": "react-scripts-ts eject"
+  },
+  "proxy": "http://localhost:4000/",
+  "devDependencies": {
+    "@types/enzyme": "3.1.9",
+    "@types/enzyme-adapter-react-16": "1.0.2",
+    "@types/jest": "22.1.4",
+    "@types/node": "9.4.6",
+    "@types/react": "16.0.40",
+    "@types/react-dom": "16.0.4",
+    "enzyme": "3.3.0",
+    "enzyme-adapter-react-16": "1.1.1",
+    "jest-fetch-mock": "1.4.2",
+    "react-test-renderer": "16.2.0",
+    "typescript": "2.7.2"
+  }
+}
