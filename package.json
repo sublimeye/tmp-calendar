@@ -19,11 +19,11 @@
     "deploy-dev": "yarn run clean && yarn run build && heroku local",
     "test": "concurrently --kill-others-on-fail \"cd client && yarn run test\" \"yarn run test-server\"",
     "test-server": "jest",
-    "start": "concurrently --kill-others-on-fail \"yarn run server\" \"yarn run client\"",
+    "start": "concurrently \"yarn run server\" \"yarn run client\"",
     "build": "tsc && yarn build-client",
-    "build-client": "concurrently --kill-others-on-fail \"cd client && yarn run build && cd - && cp -r client/build build/server/build\"",
+    "build-client": "concurrently \"cd client && yarn run build && cd - && cp -r client/build build/server/build\"",
     "client": "cd client && react-scripts-ts start",
-    "server": "concurrently --kill-others-on-fail \"yarn build && nodemon build/server/index.js\" \"tsc -w\""
+    "server": "concurrently \"yarn build && nodemon build/server/index.js\" \"tsc -w\""
   },
   "devDependencies": {
     "@types/express": "4.16.0",
@@ -32,8 +32,11 @@
     "@types/node": "10.9.4",
     "concurrently": "4.0.1",
     "nodemon": "1.18.4",
+    "prettier": "^1.18.2",
     "supertest": "3.1.0",
     "ts-jest": "23.1.4",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^4.0.0",
     "typescript": "3.0.3"
   },
   "jest": {
