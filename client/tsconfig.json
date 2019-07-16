@@ -30,6 +30,9 @@
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true
   },
+  "paths": {
+    "src/*": ["./*"]
+  },
   "exclude": [
     "node_modules",
     "build",
