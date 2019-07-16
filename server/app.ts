@@ -1,7 +1,7 @@
-import * as express from 'express';
-import * as path from 'path';
+import express from 'express'
+import path from 'path'
 
-const app = express();
+const app = express()
 
 app.get('/api', (req, res) => {
   /**
@@ -16,9 +16,9 @@ app.get('/api', (req, res) => {
   // }
 
   res.json({
-    data: []
-  });
-});
+    data: [],
+  })
+})
 
 /**
  * These endpoints are used for deploying the Heroku app, which serves
@@ -26,9 +26,9 @@ app.get('/api', (req, res) => {
  * with the CRA server, which proxies requests to this server for /api, but serves
  * the content separately for HMR.
  */
-app.use('/static', express.static(path.join(`${__dirname}/build/static`)));
+app.use('/static', express.static(path.join(`${__dirname}/build/static`)))
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(`${__dirname}/build/index.html`));
-});
+  res.sendFile(path.join(`${__dirname}/build/index.html`))
+})
 
-export default app;
+export default app

@@ -1,6 +1,6 @@
-import './App.css';
+import './App.css'
 
-import * as React from 'react';
+import * as React from 'react'
 
 class App extends React.Component {
   // Example fetch to the server.
@@ -11,10 +11,12 @@ class App extends React.Component {
   // }
 
   render() {
-    return <div id='App'>
-      <span>Hello, world</span>
-    </div>;
+    return (
+      <div id="App">
+        <span>Hello, world</span>
+      </div>
+    )
   }
 }
 
-export default App;
+export default App
