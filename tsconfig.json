@@ -19,7 +19,6 @@
     "noUnusedLocals": true,
 
     "allowSyntheticDefaultImports": true,
-    "isolatedModules": true,
     "alwaysStrict": true,
     "strict": true,
     "strictFunctionTypes": true,
