@@ -1,6 +1,5 @@
-import './App.css'
-
-import * as React from 'react'
+import React from 'react'
+import Calendar from 'src/components/Calendar'
 
 class App extends React.Component {
   // Example fetch to the server.
@@ -13,7 +12,9 @@ class App extends React.Component {
   render() {
     return (
       <div id="App">
-        <span>Hello, world</span>
+        <div style={{width: '800px', margin: '0 auto'}}>
+          <Calendar />
+        </div>
       </div>
     )
   }
