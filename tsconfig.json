@@ -16,7 +16,19 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "alwaysStrict": true,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "experimentalDecorators": true,
+    "pretty": true,
+    "noErrorTruncation": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true
   },
   "include": [
     "server/*.ts",
