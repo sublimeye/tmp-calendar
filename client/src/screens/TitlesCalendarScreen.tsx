@@ -36,6 +36,30 @@ class TitlesCalendarScreen extends React.PureComponent<Props, State> {
     loading: true,
   }
 
+  static fallbackRedirect() {
+    const today = new Date()
+    return <Redirect to={`/calendar/${today.getFullYear()}/${today.getMonth() + 1}`} noThrow />
+  }
+
+  static parseDateParams(
+    yearParam: string = '',
+    monthParam: string = '',
+  ): { year: number; month: number } | void {
+    const year = parseInt(yearParam || '', 10)
+    const month = parseInt(monthParam || '', 10)
+    const isInvalid =
+      !Number.isInteger(year) ||
+      !Number.isInteger(month) ||
+      year < 1900 ||
+      year > 2200 ||
+      month < 1 ||
+      month > 12
+
+    return isInvalid ? undefined : { year, month }
+  }
+
+  // Clearly this will only work once and if we want to fetch when month changed, we need to make
+  // extra calls in handleCalendarChange
   componentDidMount(): void {
     this.setState({ loading: true })
     titlesService
@@ -84,26 +108,17 @@ class TitlesCalendarScreen extends React.PureComponent<Props, State> {
   }
 
   render() {
-    console.log('render')
-    const year = parseInt(this.props.year || '', 10)
-    const month = parseInt(this.props.month || '', 10)
-    if (
-      !Number.isInteger(year) ||
-      !Number.isInteger(month) ||
-      year < 1900 ||
-      year > 2200 ||
-      month < 1 ||
-      month > 12
-    ) {
-      const today = new Date()
-      return <Redirect to={`/calendar/${today.getFullYear()}/${today.getMonth() + 1}`} noThrow />
+    const params = TitlesCalendarScreen.parseDateParams(this.props.year, this.props.month)
+
+    if (!params) {
+      return TitlesCalendarScreen.fallbackRedirect()
     }
 
     return (
       <div style={{ width: '800px', margin: '0 auto' }}>
         <Calendar
-          year={year}
-          month={month - 1}
+          year={params.year}
+          month={params.month - 1}
           renderDay={this.renderDay}
           onChange={this.handleCalendarChange}
         />

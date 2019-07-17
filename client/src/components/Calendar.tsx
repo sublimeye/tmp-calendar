@@ -59,15 +59,21 @@ export class Calendar extends React.Component<Props, State> {
   render() {
     const [year, month] = getUTCYearMonth(this.state.utcDate)
     const calendar = generateCalendarMemo(year, month)
+    const t = new Date()
+    const todayUtc = Date.UTC(t.getUTCFullYear(), t.getUTCMonth(), t.getUTCDate())
 
     return (
       <div>
         <div className={s.header}>
-          <button style={{width: '200px'}} onClick={this.changeMonth(-1)}>←</button>
-          <div>
+          <button className={s.prevButton} onClick={this.changeMonth(-1)}>
+            ◀
+          </button>
+          <div className={s.monthNamePlaceholder}>
             {MONTHS[month]} {year}
           </div>
-          <button style={{width: '200px'}} onClick={this.changeMonth(1)}>→</button>
+          <button className={s.nextButton} onClick={this.changeMonth(1)}>
+            ►
+          </button>
         </div>
 
         <div className={s.calendarGrid}>
@@ -77,12 +83,22 @@ export class Calendar extends React.Component<Props, State> {
             </div>
           ))}
 
-          {calendar.map(entry => (
-            <div key={`${entry.utcDate}`} className={cx(s.day, entry.within && s.dayWithin)}>
-              <div className={s.dayNumber}>{entry.dayOfMonth}</div>
-              <div className={s.dayContent}>{this.props.renderDay(entry)}</div>
-            </div>
-          ))}
+          {calendar.map(entry => {
+            const isToday = +entry.utcDate === todayUtc
+            const isFirstDay = entry.dayOfMonth === 1
+            const dayMonth = MONTHS[entry.utcDate.getUTCMonth()]
+            return (
+              <div key={`${entry.utcDate}`} className={cx(s.day, entry.within && s.dayWithin)}>
+                <div className={s.dayOfMonth}>
+                  <span className={cx(s.dayNumber, isToday && s.dayToday)}>
+                    {entry.dayOfMonth}
+                    {isFirstDay && ` ${dayMonth}`}
+                  </span>
+                </div>
+                <div className={s.dayContent}>{this.props.renderDay(entry)}</div>
+              </div>
+            )
+          })}
         </div>
       </div>
     )
@@ -91,18 +107,33 @@ export class Calendar extends React.Component<Props, State> {
 
 export default Calendar
 
+const buttonBase = css`
+    transition: 200ms linear;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    background: none;
+    &:hover {
+      transform: scale(1.5);
+    }
+    &:focus {
+      outline: none;
+    }
+`
 const s = {
   header: css`
     display: flex;
     justify-content: center;
+    align-items: center;
   `,
   calendarGrid: css`
     display: grid;
     grid-auto-rows: minmax(75px, 100px);
     grid-template-rows: auto;
     grid-template-columns: repeat(7, 1fr);
-    border-bottom: 1px solid black;
-    border-left: 1px solid black;
+    border-bottom: 1px solid white;
+    border-left: 1px solid white;
   `,
   day: css`
     display: flex;
@@ -111,21 +142,46 @@ const s = {
     border-top: 1px solid black;
     border-right: 1px solid black;
     overflow: hidden;
-    background: gray;
+    background: #e6e6e6;
+  `,
+  dayOfMonth: css`
+    margin: 2px 0 8px;
   `,
   dayWithin: css`
     background: white;
   `,
   dayNumber: css`
-    font-weight: bold;
+    padding: 5px;
   `,
   dayContent: css`
     overflow: scroll;
   `,
+  dayToday: css`
+    color: white;
+    background: #aa251c;
+    border-radius: 25px;
+  `,
   weekTitle: css`
     padding: 5px;
-    border-top: 1px solid black;
-    border-right: 1px solid black;
+    color: white;
+    border-top: 1px solid white;
+    border-right: 1px solid white;
     font-weight: 600;
+  `,
+  monthNamePlaceholder: css`
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    min-width: 200px;
+  `,
+  prevButton: css`
+    ${buttonBase};
+    // this unicode left arrow character is a bit different from right arrow :)
+    font-size: 1.8rem;
+    margin-top: -3px;
+  `,
+  nextButton: css`
+    ${buttonBase};
+    font-size: 1.5rem;
   `,
 }
