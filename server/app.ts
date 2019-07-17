@@ -1,24 +1,13 @@
 import express from 'express'
 import path from 'path'
+import cors from 'cors'
+import apiRouter from './apiRouter'
 
 const app = express()
+// we don't need it on localhost though
+app.use(cors())
 
-app.get('/api', (req, res) => {
-  /**
-   * An example of handling query parameters and bad requests:
-   */
-  // const { filterString } = req.query;
-
-  // if (!filterString) {
-  //   res.statusMessage = `Must provide a filterString query parameter.`;
-  //   res.sendStatus(HttpStatus.BAD_REQUEST);
-  //   return;
-  // }
-
-  res.json({
-    data: [],
-  })
-})
+app.use('/api', apiRouter)
 
 /**
  * These endpoints are used for deploying the Heroku app, which serves

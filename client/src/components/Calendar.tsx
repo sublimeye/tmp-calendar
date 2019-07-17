@@ -40,7 +40,7 @@ function getUTCYearMonth(date: Date) {
   return [date.getUTCFullYear(), date.getUTCMonth()]
 }
 
-export class Calendar extends React.PureComponent<Props, State> {
+export class Calendar extends React.Component<Props, State> {
   state = {
     utcDate: UTCDate(this.props.year, this.props.month),
   }
