@@ -71,7 +71,14 @@ class TitlesCalendarScreen extends React.PureComponent<Props, State> {
     this.fetchTitles()
   }
 
+  componentDidUpdate(prevProps: Props): void {
+    if (this.props.year !== prevProps.year || this.props.month !== prevProps.month) {
+      this.fetchTitles()
+    }
+  }
+
   fetchTitles(): void {
+    // Could cancel any in-progress requests
     const params = TitlesCalendarScreen.parseDateParams(this.props.year, this.props.month)
     if (!params) {
       return
@@ -118,7 +125,6 @@ class TitlesCalendarScreen extends React.PureComponent<Props, State> {
   }
 
   handleCalendarChange = (year: number, month: number) => {
-    this.fetchTitles()
     // reach router - why did you make navigate optional :shrug:?
     if (this.props.navigate) {
       this.props.navigate(`/calendar/${year}/${month + 1}`)
