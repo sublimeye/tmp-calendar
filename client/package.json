@@ -26,6 +26,6 @@
     "enzyme-adapter-react-16": "1.1.1",
     "jest-fetch-mock": "1.4.2",
     "react-test-renderer": "16.2.0",
-    "typescript": "2.7.2"
+    "typescript": "3.5.3"
   }
 }
