@@ -3,14 +3,13 @@ import { css, cx } from 'emotion'
 import { CalendarDay, generateCalendar, UTCDate } from './dateHelpers'
 import memoize from 'lodash/memoize'
 
+// month property uses the same JS Date Month format 0..11
+// still not sure which path to chose: follow JS date format or "human readable" format – since
+// this is a "public" prop of our component and it should easy to reason about
 type Props = {
   year: number
-  // month property uses the same JS Date Month format 0..11
-  // still not sure which path to chose: follow JS date format or "human readable" format – since
-  // this is a "public" prop of our component and it should easy to reason about
   month: number
   renderDay: (entry: CalendarDay) => React.ReactNode | null
-  // Exposes only the API it consumes (year, month); Should be enough for our use case
   onChange?: (year: number, month: number) => void
 }
 

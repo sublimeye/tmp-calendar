@@ -41,6 +41,13 @@ class TitlesCalendarScreen extends React.PureComponent<Props, State> {
     return <Redirect to={`/calendar/${today.getFullYear()}/${today.getMonth() + 1}`} noThrow />
   }
 
+  /**
+   * I'm not proud of this thing.
+   * Supposed to convert string year/month to number and validate if they are somewhat
+   * valid numbers;
+   * @param yearParam
+   * @param monthParam
+   */
   static parseDateParams(
     yearParam: string = '',
     monthParam: string = '',
@@ -61,14 +68,24 @@ class TitlesCalendarScreen extends React.PureComponent<Props, State> {
   // Clearly this will only work once and if we want to fetch when month changed, we need to make
   // extra calls in handleCalendarChange
   componentDidMount(): void {
+    this.fetchTitles()
+  }
+
+  fetchTitles(): void {
+    const params = TitlesCalendarScreen.parseDateParams(this.props.year, this.props.month)
+    if (!params) {
+      return
+    }
+
     this.setState({ loading: true })
     titlesService
-      .getTitles()
+      .getTitles(params.year, params.month)
       .then(titles => {
         this.setState({ titles, loading: false })
       })
-      .catch(() => {
+      .catch((error: Error) => {
         this.setState({ loading: false })
+        console.error('Unable to fetch titles: ' + error.message)
       })
   }
 
@@ -101,6 +118,7 @@ class TitlesCalendarScreen extends React.PureComponent<Props, State> {
   }
 
   handleCalendarChange = (year: number, month: number) => {
+    this.fetchTitles()
     // reach router - why did you make navigate optional :shrug:?
     if (this.props.navigate) {
       this.props.navigate(`/calendar/${year}/${month + 1}`)

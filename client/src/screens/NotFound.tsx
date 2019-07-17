@@ -6,7 +6,7 @@ class NotFound extends React.PureComponent<RouteComponentProps> {
     return (
       <div>
         <h1 style={{ textAlign: 'center' }}>I wonder how did you get here?</h1>
-        <Link to={`/`}>Go home!</Link>
+        <Link to={`/`}>Take me home!</Link>
       </div>
     )
   }

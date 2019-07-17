@@ -1,7 +1,7 @@
 import express from 'express'
 import path from 'path'
 import cors from 'cors'
-import apiRouter from './apiRouter'
+import apiRouter from './titlesRouter'
 
 const app = express()
 // we don't need it on localhost though
