@@ -139,7 +139,7 @@ class TitlesCalendarScreen extends React.PureComponent<Props, State> {
     }
 
     return (
-      <div style={{ width: '800px', margin: '0 auto' }}>
+      <div style={{ width: '800px', margin: '0 auto', color: 'black' }}>
         <Calendar
           year={params.year}
           month={params.month - 1}
