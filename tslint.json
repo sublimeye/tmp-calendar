@@ -63,6 +63,7 @@
       true,
       "never"
     ],
+    "no-console": false,
     "no-implicit-dependencies": false,
     "no-object-literal-type-assertion": false,
     "no-submodule-imports": false

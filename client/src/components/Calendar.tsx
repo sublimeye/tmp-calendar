@@ -5,6 +5,9 @@ import memoize from 'lodash/memoize'
 
 type Props = {
   year: number
+  // month property uses the same JS Date Month format 0..11
+  // still not sure which path to chose: follow JS date format or "human readable" format – since
+  // this is a "public" prop of our component and it should easy to reason about
   month: number
   renderDay: (entry: CalendarDay) => React.ReactNode | null
   // Exposes only the API it consumes (year, month); Should be enough for our use case
@@ -60,11 +63,11 @@ export class Calendar extends React.PureComponent<Props, State> {
     return (
       <div>
         <div className={s.header}>
-          <button onClick={this.changeMonth(-1)}>←</button>
+          <button style={{width: '200px'}} onClick={this.changeMonth(-1)}>←</button>
           <div>
             {MONTHS[month]} {year}
           </div>
-          <button onClick={this.changeMonth(1)}>→</button>
+          <button style={{width: '200px'}} onClick={this.changeMonth(1)}>→</button>
         </div>
 
         <div className={s.calendarGrid}>

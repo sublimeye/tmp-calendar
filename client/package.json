@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://www.yourHerokuUrl.com",
   "dependencies": {
+    "@reach/router": "^1.2.1",
     "react": "16.2.0",
     "react-dom": "16.2.0",
     "react-scripts-ts": "2.13.0"
@@ -20,6 +21,7 @@
     "@types/enzyme-adapter-react-16": "1.0.2",
     "@types/jest": "22.1.4",
     "@types/node": "9.4.6",
+    "@types/reach__router": "^1.2.4",
     "@types/react": "16.0.40",
     "@types/react-dom": "16.0.4",
     "enzyme": "3.3.0",

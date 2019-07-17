@@ -1,9 +1,20 @@
 import React from 'react'
-import Calendar from 'src/components/Calendar'
+import { Redirect, RouteComponentProps } from '@reach/router'
 import { css } from 'emotion'
 import groupBy from 'lodash/groupBy'
 import map from 'lodash/map'
-import { CalendarDay } from './dateHelpers'
+
+import Calendar from 'src/components/Calendar'
+import { CalendarDay } from 'src/components/dateHelpers'
+
+type Props = {
+  // Unfortunately Reach Router does not have proper support for typescript
+  // But at least it works with this React version and not complaining about React Context
+  // This is an ugly and temporary solution; In real world I'd have updated to the latest react
+  // and switched to React Router
+  year?: string
+  month?: string
+} & RouteComponentProps
 
 const data = [
   {
@@ -85,7 +96,7 @@ const dataGrouped = groupBy(
   'dateUtc',
 )
 
-class TitlesCalendar extends React.PureComponent {
+class TitlesCalendarScreen extends React.PureComponent<Props> {
   renderDay(day: CalendarDay) {
     const group = dataGrouped[+day.utcDate]
     if (!group) {
@@ -105,10 +116,36 @@ class TitlesCalendar extends React.PureComponent {
     )
   }
 
+  handleCalendarChange = (year: number, month: number) => {
+    // reach router - why did you make navigate optional :shrug:?
+    if (this.props.navigate) {
+      this.props.navigate(`/calendar/${year}/${month + 1}`)
+    }
+  }
+
   render() {
+    const year = parseInt(this.props.year || '', 10)
+    const month = parseInt(this.props.month || '', 10)
+    if (
+      !Number.isInteger(year) ||
+      !Number.isInteger(month) ||
+      year < 1900 ||
+      year > 2200 ||
+      month < 1 ||
+      month > 12
+    ) {
+      const today = new Date()
+      return <Redirect to={`/calendar/${today.getFullYear()}/${today.getMonth() + 1}`} noThrow />
+    }
+
     return (
       <div style={{ width: '800px', margin: '0 auto' }}>
-        <Calendar year={2018} month={7} renderDay={this.renderDay} />
+        <Calendar
+          year={year}
+          month={month - 1}
+          renderDay={this.renderDay}
+          onChange={this.handleCalendarChange}
+        />
       </div>
     )
   }
@@ -127,4 +164,4 @@ const e = {
   `,
 }
 
-export default TitlesCalendar
+export default TitlesCalendarScreen
