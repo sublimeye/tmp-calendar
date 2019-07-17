@@ -1,3 +1,9 @@
+### Comments
+
+* Even nowadays I don't have favorite styling library for React
+* Outdated React / no hooks
+* Start pack does not support Node > 9
+
 This is a simple directory structure wrapped around create-react-app-typescript,
 which also includes a node server. You can run everything by doing:
 
